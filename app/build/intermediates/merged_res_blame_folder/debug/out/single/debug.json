@@ -1,0 +1,78 @@
+[
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_btn_outline_green.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_btn_outline_green.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_btn_outline_red.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_btn_outline_red.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_card.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_card.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_btn_green.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_btn_green.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_walk.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_walk.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_run.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_run.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_btn_control.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_btn_control.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/layout_activity_main.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/drawable_bg_btn_outline_white.xml.flat",
+        "source": "com.intervalrunner.app-main-35:/drawable/bg_btn_outline_white.xml"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.intervalrunner.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.intervalrunner.app-main-35:/mipmap-xxxhdpi/ic_launcher.png"
+    }
+]

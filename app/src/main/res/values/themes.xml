@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.IntervalRunner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#63DC96</item>
+        <item name="colorPrimaryVariant">#0D3D22</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="android:windowBackground">#111827</item>
+        <item name="android:statusBarColor">#111827</item>
+        <item name="android:navigationBarColor">#111827</item>
+    </style>
+</resources>
