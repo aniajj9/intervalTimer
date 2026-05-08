@@ -182,7 +182,8 @@ public class TimerService extends Service {
         playFinishSound();
         if (wakeLock.isHeld()) wakeLock.release();
         broadcastFinished();
-        stopSelf();
+        // Delay stopSelf so the broadcast has time to be delivered
+        handler.postDelayed(this::stopSelf, 3000);
     }
 
     // =========================================================================

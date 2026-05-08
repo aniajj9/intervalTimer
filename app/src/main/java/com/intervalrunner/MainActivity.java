@@ -42,14 +42,17 @@ public class MainActivity extends AppCompatActivity {
     private final Handler  uiHandler   = new Handler(Looper.getMainLooper());
     private final Runnable uiPollTick  = new Runnable() {
         @Override public void run() {
-            if (serviceBound && timerService != null && timerService.isRunning()) {
+            if (!serviceBound || timerService == null) return;
+            if (timerService.isRunning()) {
                 updateTimerUI(
                         timerService.getSecondsLeft(),
                         timerService.getCurrentRep(),
                         timerService.isCurrentlyWalking());
-                // FIX: also poll phase label so it never gets stuck
                 updatePhaseUI(timerService.isCurrentlyWalking());
-                uiHandler.postDelayed(this, 250); // 4× per second for smooth display
+                uiHandler.postDelayed(this, 250);
+            } else if (binding.layoutTimer.getVisibility() == View.VISIBLE) {
+                // Timer was running but stopped — workout finished
+                onWorkoutFinished(0, 0);
             }
         }
     };
