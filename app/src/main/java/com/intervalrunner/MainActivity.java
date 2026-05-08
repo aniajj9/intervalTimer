@@ -335,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
                 .putInt("runMin",  runMinutes)
                 .putInt("reps",    repetitions)
                 .apply();
+        stopService(new Intent(this, TimerService.class));
         showFinishedUI();
     }
 
