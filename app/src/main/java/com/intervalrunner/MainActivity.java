@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private PaceStore paceStore;
 
-    private int walkMinutes = 4;
-    private int runMinutes  = 1;
-    private int repetitions = 3;
+    private int walkMinutes;
+    private int runMinutes;
+    private int repetitions;
 
     // Service
     private TimerService timerService;
@@ -43,9 +44,11 @@ public class MainActivity extends AppCompatActivity {
         @Override public void run() {
             if (serviceBound && timerService != null && timerService.isRunning()) {
                 updateTimerUI(
-                    timerService.getSecondsLeft(),
-                    timerService.getCurrentRep(),
-                    timerService.isCurrentlyWalking());
+                        timerService.getSecondsLeft(),
+                        timerService.getCurrentRep(),
+                        timerService.isCurrentlyWalking());
+                // FIX: also poll phase label so it never gets stuck
+                updatePhaseUI(timerService.isCurrentlyWalking());
                 uiHandler.postDelayed(this, 250); // 4× per second for smooth display
             }
         }
@@ -72,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "FINISHED":
                     onWorkoutFinished(
-                        intent.getFloatExtra("walkKmh", 0),
-                        intent.getFloatExtra("runKmh",  0));
+                            intent.getFloatExtra("walkKmh", 0),
+                            intent.getFloatExtra("runKmh",  0));
                     break;
             }
         }
@@ -113,9 +116,14 @@ public class MainActivity extends AppCompatActivity {
             setTurnScreenOn(true);
         } else {
             getWindow().addFlags(
-                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         }
+
+        SharedPreferences last = getSharedPreferences("last_session", MODE_PRIVATE);
+        walkMinutes = last.getInt("walkMin", 4);
+        runMinutes  = last.getInt("runMin",  1);
+        repetitions = last.getInt("reps",    3);
 
         paceStore = new PaceStore(this);
 
@@ -137,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(eventReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
         } else {
-            registerReceiver(eventReceiver, filter);
+            registerReceiver(eventReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
         }
     }
 
@@ -247,16 +255,15 @@ public class MainActivity extends AppCompatActivity {
     private void requestLocationThenStart() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Explain why, then ask
             new AlertDialog.Builder(this)
-                .setTitle("Location for pace tracking")
-                .setMessage("The app uses GPS during your run to measure your actual walking and running speed. This improves the distance estimate each week.\n\nYou can deny — the timer still works perfectly.")
-                .setPositiveButton("Allow GPS", (d, w) ->
-                    ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        LOCATION_PERMISSION_REQUEST))
-                .setNegativeButton("Skip, just start", (d, w) -> startWorkout())
-                .show();
+                    .setTitle("Location for pace tracking")
+                    .setMessage("The app uses GPS during your run to measure your actual walking and running speed. This improves the distance estimate each week.\n\nYou can deny — the timer still works perfectly.")
+                    .setPositiveButton("Allow GPS", (d, w) ->
+                            ActivityCompat.requestPermissions(this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    LOCATION_PERMISSION_REQUEST))
+                    .setNegativeButton("Skip, just start", (d, w) -> startWorkout())
+                    .show();
         } else {
             startWorkout();
         }
@@ -271,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
         ContextCompat.startForegroundService(this, si);
 
         showTimerUI();
-        updatePhaseUI(true);
+        updatePhaseUI(true); // first phase is always walk
         binding.tvTimer.setText(walkMinutes + ":00");
         binding.tvRepCounter.setText("rep 1 of " + repetitions);
         updatePauseButton(false);
@@ -281,15 +288,15 @@ public class MainActivity extends AppCompatActivity {
     /** Accidental-touch protection: requires a deliberate confirmation. */
     private void confirmStop() {
         new AlertDialog.Builder(this)
-            .setTitle("Stop workout?")
-            .setMessage("This will end your session early.")
-            .setPositiveButton("Stop", (d, w) -> {
-                if (serviceBound && timerService != null) timerService.stopTimer();
-                stopService(new Intent(this, TimerService.class));
-                showSetupUI();
-            })
-            .setNegativeButton("Keep going", null)
-            .show();
+                .setTitle("Stop workout?")
+                .setMessage("This will end your session early.")
+                .setPositiveButton("Stop", (d, w) -> {
+                    if (serviceBound && timerService != null) timerService.stopTimer();
+                    stopService(new Intent(this, TimerService.class));
+                    showSetupUI();
+                })
+                .setNegativeButton("Keep going", null)
+                .show();
     }
 
     /** Accidental-touch protection for Pause: requires confirmation. */
@@ -297,13 +304,12 @@ public class MainActivity extends AppCompatActivity {
         if (!serviceBound || timerService == null) return;
         if (!timerService.isPaused()) {
             new AlertDialog.Builder(this)
-                .setTitle("Pause workout?")
-                .setMessage("Timer will stop until you resume.")
-                .setPositiveButton("Pause", (d, w) -> sendPauseResume())
-                .setNegativeButton("Keep going", null)
-                .show();
+                    .setTitle("Pause workout?")
+                    .setMessage("Timer will stop until you resume.")
+                    .setPositiveButton("Pause", (d, w) -> sendPauseResume())
+                    .setNegativeButton("Keep going", null)
+                    .show();
         } else {
-            // Resuming needs no confirmation
             sendPauseResume();
         }
     }
@@ -324,6 +330,11 @@ public class MainActivity extends AppCompatActivity {
             summary = String.format("~%.1f km covered\n(pace tracking improves each session)", dist);
         }
         binding.tvFinishSummary.setText(summary);
+        getSharedPreferences("last_session", MODE_PRIVATE).edit()
+                .putInt("walkMin", walkMinutes)
+                .putInt("runMin",  runMinutes)
+                .putInt("reps",    repetitions)
+                .apply();
         showFinishedUI();
     }
 
@@ -333,11 +344,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                != PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                        != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                NOTIFICATION_PERMISSION_REQUEST);
+                    new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                    NOTIFICATION_PERMISSION_REQUEST);
         }
     }
 
@@ -345,7 +356,6 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int req, @NonNull String[] perms, @NonNull int[] results) {
         super.onRequestPermissionsResult(req, perms, results);
         if (req == LOCATION_PERMISSION_REQUEST) {
-            // Whether granted or not, start the workout — GPS is best-effort
             startWorkout();
         }
     }

@@ -9,26 +9,26 @@
 9        android:targetSdkVersion="34" />
 10
 11    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-11-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:4:5-77
-11-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:4:22-74
+11-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:4:5-77
+11-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:4:22-74
 12    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-12-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:5:5-92
-12-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:5:22-89
+12-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:5:5-92
+12-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:5:22-89
 13    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-13-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:6:5-77
-13-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:6:22-74
+13-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:6:5-77
+13-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:6:22-74
 14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-14-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:7:5-79
-14-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:7:22-76
+14-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:7:5-79
+14-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:7:22-76
 15    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-15-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:8:5-81
-15-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:8:22-78
+15-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:8:5-81
+15-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:8:22-78
 16    <uses-permission android:name="android.permission.VIBRATE" />
-16-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:9:5-66
-16-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:9:22-63
+16-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:9:5-66
+16-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:9:22-63
 17    <uses-permission android:name="android.permission.WAKE_LOCK" />
-17-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:10:5-68
-17-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:10:22-65
+17-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:10:5-68
+17-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:10:22-65
 18
 19    <permission
 19-->[androidx.core:core:1.12.0] C:\Users\aniaj\.gradle\caches\transforms-3\606cc34df7cdbd73aa5e87d0916f75fd\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
@@ -42,52 +42,52 @@
 23-->[androidx.core:core:1.12.0] C:\Users\aniaj\.gradle\caches\transforms-3\606cc34df7cdbd73aa5e87d0916f75fd\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
 24
 25    <application
-25-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:12:5-35:19
+25-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:12:5-35:19
 26        android:allowBackup="true"
-26-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:13:9-35
+26-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:13:9-35
 27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 27-->[androidx.core:core:1.12.0] C:\Users\aniaj\.gradle\caches\transforms-3\606cc34df7cdbd73aa5e87d0916f75fd\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
 28        android:debuggable="true"
 29        android:extractNativeLibs="false"
 30        android:icon="@mipmap/ic_launcher"
-30-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:14:9-43
+30-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:14:9-43
 31        android:label="@string/app_name"
-31-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:15:9-41
+31-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:15:9-41
 32        android:roundIcon="@mipmap/ic_launcher_round"
-32-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:16:9-54
+32-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:16:9-54
 33        android:supportsRtl="true"
-33-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:17:9-35
+33-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:17:9-35
 34        android:testOnly="true"
 35        android:theme="@style/Theme.IntervalRunner" >
-35-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:18:9-52
+35-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:18:9-52
 36        <activity
-36-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:20:9-28:20
+36-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:20:9-28:20
 37            android:name="com.intervalrunner.MainActivity"
-37-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:21:13-41
+37-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:21:13-41
 38            android:exported="true"
-38-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:22:13-36
+38-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:22:13-36
 39            android:screenOrientation="portrait" >
-39-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:23:13-49
+39-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:23:13-49
 40            <intent-filter>
-40-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:24:13-27:29
+40-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:24:13-27:29
 41                <action android:name="android.intent.action.MAIN" />
-41-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:25:17-69
-41-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:25:25-66
+41-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:25:17-69
+41-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:25:25-66
 42
 43                <category android:name="android.intent.category.LAUNCHER" />
-43-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:26:17-77
-43-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:26:27-74
+43-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:26:17-77
+43-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:26:27-74
 44            </intent-filter>
 45        </activity>
 46
 47        <service
-47-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:30:9-33:61
+47-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:30:9-33:61
 48            android:name="com.intervalrunner.TimerService"
-48-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:31:13-41
+48-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:31:13-41
 49            android:exported="false"
-49-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:32:13-37
+49-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:32:13-37
 50            android:foregroundServiceType="mediaPlayback" />
-50-->C:\Users\aniaj\Downloads\IntervalRunner (5)\IntervalRunner\app\src\main\AndroidManifest.xml:33:13-58
+50-->C:\Users\aniaj\Documents\IntervalRunner\app\src\main\AndroidManifest.xml:33:13-58
 51
 52        <provider
 52-->[androidx.emoji2:emoji2:1.2.0] C:\Users\aniaj\.gradle\caches\transforms-3\cd0e31776a03b70e2d22563fb2144838\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
