@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private int walkMinutes;
     private int runMinutes;
     private int repetitions;
+    private boolean morseMinutes;
 
     // Service
     private TimerService timerService;
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         walkMinutes = last.getInt("walkMin", 4);
         runMinutes  = last.getInt("runMin",  1);
         repetitions = last.getInt("reps",    3);
+        morseMinutes = last.getBoolean("morse", false);
 
         paceStore = new PaceStore(this);
 
@@ -184,6 +186,13 @@ public class MainActivity extends AppCompatActivity {
         binding.btnRunPlus  .setOnClickListener(v -> { if (runMinutes < 30)  { runMinutes++;  updateSetupUI(); } });
         binding.btnRepsMinus.setOnClickListener(v -> { if (repetitions > 1)  { repetitions--; updateSetupUI(); } });
         binding.btnRepsPlus .setOnClickListener(v -> { if (repetitions < 20) { repetitions++; updateSetupUI(); } });
+
+        binding.switchMorse.setChecked(morseMinutes);
+        binding.switchMorse.setOnCheckedChangeListener((b, checked) -> {
+            morseMinutes = checked;
+            getSharedPreferences("last_session", MODE_PRIVATE).edit()
+                    .putBoolean("morse", checked).apply();
+        });
 
         binding.btnStart.setOnClickListener(v -> requestLocationThenStart());
         binding.btnStop .setOnClickListener(v -> confirmStop());
@@ -278,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
         si.putExtra("walkMinutes", walkMinutes);
         si.putExtra("runMinutes",  runMinutes);
         si.putExtra("repetitions", repetitions);
+        si.putExtra("morseMinutes", morseMinutes);
         ContextCompat.startForegroundService(this, si);
 
         showTimerUI();

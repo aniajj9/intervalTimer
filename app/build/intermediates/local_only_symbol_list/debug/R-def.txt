@@ -24,6 +24,7 @@ id btnWalkPlus
 id layoutFinished
 id layoutSetup
 id layoutTimer
+id switchMorse
 id timerCard
 id tvDistanceHint
 id tvFinishSummary

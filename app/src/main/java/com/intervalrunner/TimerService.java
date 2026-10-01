@@ -44,6 +44,7 @@ public class TimerService extends Service {
     private int walkSeconds;
     private int runSeconds;
     private int repetitions;
+    private boolean morseMinutes;
 
     // ---- Timer state (read by UI via getters) ----
     private int     currentRep  = 1;
@@ -65,7 +66,9 @@ public class TimerService extends Service {
 
             if (secondsLeft > 0 && secondsLeft <= 10) playTickSound();
 
-            if (!isWalking && secondsLeft > 0 && secondsLeft % 60 == 0) playMinuteBeep();
+            if (!isWalking && secondsLeft > 0 && secondsLeft % 60 == 0) {
+                playMinuteBeep((runSeconds - secondsLeft) / 60); // minutes of running completed
+            }
 
             if (secondsLeft <= 0) {
                 advancePhase();
@@ -75,11 +78,42 @@ public class TimerService extends Service {
         }
     };
 
-    private void playMinuteBeep() {
-        playSamples(buildPcm(
-                new int[]{880, 0, 880},
-                new int[]{80, 60, 80}
-        ), false);
+    private void playMinuteBeep(int minutesElapsed) {
+        if (morseMinutes) {
+            playSamples(buildMorseNumber(minutesElapsed), false);
+        } else {
+            playSamples(buildPcm(
+                    new int[]{880, 0, 880},
+                    new int[]{80, 60, 80}
+            ), false);
+        }
+    }
+
+    // ---- Morse code for minute announcements ----
+    private static final String[] MORSE_DIGITS = {
+            "-----", ".----", "..---", "...--", "....-",
+            ".....", "-....", "--...", "---..", "----."
+    };
+    private static final int MORSE_UNIT_MS = 100; // dot = 1 unit, dash = 3 units
+    private static final int MORSE_FREQ    = 880;
+
+    /** Builds PCM for a number in morse (digits separated by a 3-unit gap). */
+    private short[] buildMorseNumber(int n) {
+        java.util.List<Integer> freqs = new java.util.ArrayList<>();
+        java.util.List<Integer> durs  = new java.util.ArrayList<>();
+        String digits = String.valueOf(n);
+        for (int d = 0; d < digits.length(); d++) {
+            if (d > 0) { freqs.add(0); durs.add(MORSE_UNIT_MS * 3); } // gap between digits
+            String code = MORSE_DIGITS[digits.charAt(d) - '0'];
+            for (int i = 0; i < code.length(); i++) {
+                if (i > 0) { freqs.add(0); durs.add(MORSE_UNIT_MS); } // gap between symbols
+                freqs.add(MORSE_FREQ);
+                durs.add(code.charAt(i) == '.' ? MORSE_UNIT_MS : MORSE_UNIT_MS * 3);
+            }
+        }
+        int[] f = new int[freqs.size()], t = new int[durs.size()];
+        for (int i = 0; i < f.length; i++) { f[i] = freqs.get(i); t[i] = durs.get(i); }
+        return buildPcm(f, t);
     }
 
     // ---- GPS / pace ----
@@ -123,6 +157,7 @@ public class TimerService extends Service {
                 walkSeconds  = intent.getIntExtra("walkMinutes", 4) * 60;
                 runSeconds   = intent.getIntExtra("runMinutes",  1) * 60;
                 repetitions  = intent.getIntExtra("repetitions", 3);
+                morseMinutes = intent.getBooleanExtra("morseMinutes", false);
                 startForeground(NOTIFICATION_ID, buildNotification());
                 beginWorkout();
                 break;
@@ -317,19 +352,19 @@ public class TimerService extends Service {
         new Thread(() -> {
             try {
                 android.media.AudioTrack track = new android.media.AudioTrack.Builder()
-                    .setAudioAttributes(new AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_ALARM)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                        .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
-                        .build())
-                    .setAudioFormat(new android.media.AudioFormat.Builder()
-                        .setSampleRate(SAMPLE_RATE)
-                        .setEncoding(android.media.AudioFormat.ENCODING_PCM_16BIT)
-                        .setChannelMask(android.media.AudioFormat.CHANNEL_OUT_MONO)
-                        .build())
-                    .setTransferMode(android.media.AudioTrack.MODE_STATIC)
-                    .setBufferSizeInBytes(samples.length * 2)
-                    .build();
+                        .setAudioAttributes(new AudioAttributes.Builder()
+                                .setUsage(AudioAttributes.USAGE_ALARM)
+                                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                                .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
+                                .build())
+                        .setAudioFormat(new android.media.AudioFormat.Builder()
+                                .setSampleRate(SAMPLE_RATE)
+                                .setEncoding(android.media.AudioFormat.ENCODING_PCM_16BIT)
+                                .setChannelMask(android.media.AudioFormat.CHANNEL_OUT_MONO)
+                                .build())
+                        .setTransferMode(android.media.AudioTrack.MODE_STATIC)
+                        .setBufferSizeInBytes(samples.length * 2)
+                        .build();
 
                 track.write(samples, 0, samples.length);
                 track.play();
@@ -456,6 +491,8 @@ public class TimerService extends Service {
 
     public boolean isRunning()          { return timerActive; }
     public boolean isPaused()           { return isPaused; }
+
+
     public boolean isCurrentlyWalking() { return isWalking; }
     public int     getSecondsLeft()     { return secondsLeft; }
     public int     getCurrentRep()      { return currentRep; }

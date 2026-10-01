@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.intervalrunner.R;
@@ -61,6 +62,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final LinearLayout layoutTimer;
 
   @NonNull
+  public final SwitchCompat switchMorse;
+
+  @NonNull
   public final LinearLayout timerCard;
 
   @NonNull
@@ -95,11 +99,11 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull Button btnRunMinus, @NonNull Button btnRunPlus, @NonNull Button btnStart,
       @NonNull Button btnStop, @NonNull Button btnWalkMinus, @NonNull Button btnWalkPlus,
       @NonNull LinearLayout layoutFinished, @NonNull LinearLayout layoutSetup,
-      @NonNull LinearLayout layoutTimer, @NonNull LinearLayout timerCard,
-      @NonNull TextView tvDistanceHint, @NonNull TextView tvFinishSummary,
-      @NonNull TextView tvPhaseLabel, @NonNull TextView tvRepCounter, @NonNull TextView tvRepsValue,
-      @NonNull TextView tvRunValue, @NonNull TextView tvTimer, @NonNull TextView tvTotalDuration,
-      @NonNull TextView tvWalkValue) {
+      @NonNull LinearLayout layoutTimer, @NonNull SwitchCompat switchMorse,
+      @NonNull LinearLayout timerCard, @NonNull TextView tvDistanceHint,
+      @NonNull TextView tvFinishSummary, @NonNull TextView tvPhaseLabel,
+      @NonNull TextView tvRepCounter, @NonNull TextView tvRepsValue, @NonNull TextView tvRunValue,
+      @NonNull TextView tvTimer, @NonNull TextView tvTotalDuration, @NonNull TextView tvWalkValue) {
     this.rootView = rootView;
     this.btnDone = btnDone;
     this.btnPause = btnPause;
@@ -114,6 +118,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.layoutFinished = layoutFinished;
     this.layoutSetup = layoutSetup;
     this.layoutTimer = layoutTimer;
+    this.switchMorse = switchMorse;
     this.timerCard = timerCard;
     this.tvDistanceHint = tvDistanceHint;
     this.tvFinishSummary = tvFinishSummary;
@@ -231,6 +236,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.switchMorse;
+      SwitchCompat switchMorse = ViewBindings.findChildViewById(rootView, id);
+      if (switchMorse == null) {
+        break missingId;
+      }
+
       id = R.id.timerCard;
       LinearLayout timerCard = ViewBindings.findChildViewById(rootView, id);
       if (timerCard == null) {
@@ -293,9 +304,9 @@ public final class ActivityMainBinding implements ViewBinding {
 
       return new ActivityMainBinding((ScrollView) rootView, btnDone, btnPause, btnRepsMinus,
           btnRepsPlus, btnRunMinus, btnRunPlus, btnStart, btnStop, btnWalkMinus, btnWalkPlus,
-          layoutFinished, layoutSetup, layoutTimer, timerCard, tvDistanceHint, tvFinishSummary,
-          tvPhaseLabel, tvRepCounter, tvRepsValue, tvRunValue, tvTimer, tvTotalDuration,
-          tvWalkValue);
+          layoutFinished, layoutSetup, layoutTimer, switchMorse, timerCard, tvDistanceHint,
+          tvFinishSummary, tvPhaseLabel, tvRepCounter, tvRepsValue, tvRunValue, tvTimer,
+          tvTotalDuration, tvWalkValue);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
